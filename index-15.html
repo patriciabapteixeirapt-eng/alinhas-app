@@ -1,0 +1,1118 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f1117">
+<title>ALINHAS?</title>
+
+<style>
+:root{
+  --bg:#f4efe7; --card:#fffdf8; --ink:#151515; --muted:#6f6a63; --line:#ddd3c6;
+  --pink1:#ff5a9b; --pink2:#ec2d78; --violet1:#8d67ff; --violet2:#6946e7;
+  --blue1:#698cff; --blue2:#4268ea; --green:#1e9c6d; --shadow:0 14px 36px rgba(0,0,0,.09)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+body.dark{
+  --bg:#0f1117;--card:#181b22;--ink:#f7f4ee;--muted:#aaa49a;--line:#333741;
+  --shadow:0 14px 38px rgba(0,0,0,.28)
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{max-width:720px;margin:0 auto;padding:20px 15px 44px}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.brand{font-size:clamp(42px,11vw,72px);font-weight:1000;letter-spacing:-.065em;line-height:.9}
+.tagline{margin:9px 0 0;color:var(--muted);font-size:15px;line-height:1.35}
+.toptools{display:flex;gap:6px}
+.iconbtn{
+  min-width:40px;height:40px;border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:13px;font-weight:900
+}
+.daily{
+  margin:15px 0;border:1px dashed var(--line);border-radius:16px;padding:12px 14px;
+  background:color-mix(in srgb,var(--card) 82%,transparent)
+}
+.daily span{display:block;font-size:10px;letter-spacing:.14em;font-weight:1000;color:var(--muted);margin-bottom:3px}
+.home{display:grid;gap:10px;margin:14px 0 18px}
+.heroBtn{
+  border:0;color:white;border-radius:19px;padding:16px;display:flex;align-items:center;gap:13px;
+  text-align:left;box-shadow:var(--shadow)
+}
+.heroBtn .ico{width:38px;font-size:25px;text-align:center}
+.heroBtn strong{display:block;font-size:17px}
+.heroBtn small{display:block;margin-top:3px;font-size:12px;opacity:.9}
+.pink{background:linear-gradient(135deg,var(--pink1),var(--pink2))}
+.violet{background:linear-gradient(135deg,var(--violet1),var(--violet2))}
+.blue{background:linear-gradient(135deg,var(--blue1),var(--blue2))}
+.section{
+  background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;margin-top:14px;box-shadow:0 8px 24px rgba(0,0,0,.04)
+}
+.section h2{margin:0 0 7px;font-size:20px;letter-spacing:-.02em}
+.section p.sub{margin:0 0 12px;color:var(--muted);font-size:14px}
+label{display:block;font-size:13px;font-weight:900;margin:12px 0 7px}
+input,select,textarea{
+  width:100%;min-height:46px;border:1px solid var(--line);border-radius:14px;
+  padding:11px 12px;background:var(--card);color:var(--ink)
+}
+textarea{resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:7px}.section #cats{max-height:230px;overflow:auto;padding-right:4px}
+.chip{
+  border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;
+  padding:8px 11px;font-weight:800;font-size:13px
+}
+.chip.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.primary,.ghost{
+  width:100%;min-height:46px;border-radius:14px;font-weight:900;margin-top:10px
+}
+.primary{border:0;background:var(--ink);color:var(--bg)}
+.ghost{border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.invite{
+  position:relative;min-height:320px;border:1px solid var(--line);border-radius:26px;padding:24px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--card) 96%,#fff),var(--card));
+  box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center
+}
+.eyebrow{font-size:10px;font-weight:1000;letter-spacing:.14em;color:var(--muted)}
+.invite h1{font-size:clamp(34px,8vw,58px);line-height:.98;letter-spacing:-.045em;margin:12px 0}
+.invite p{font-size:18px;line-height:1.45;margin:0}
+.invite .signature{margin-top:auto;padding-top:18px;font-size:13px;font-weight:1000}
+.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.actions button{
+  min-height:44px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:13px;font-weight:850
+}
+.status{
+  margin-top:10px;padding:11px 12px;border-radius:13px;background:color-mix(in srgb,var(--card) 80%,transparent);
+  border:1px dashed var(--line);font-size:13px;color:var(--muted)
+}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.result{
+  margin-top:10px;padding:12px 13px;border:1px solid var(--line);border-radius:14px;background:var(--card);
+  font-weight:750;line-height:1.4
+}
+.toolgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tool{
+  border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:15px;
+  min-height:72px;padding:10px 8px;font-weight:850;font-size:12px
+}
+.tool span{display:block;font-size:21px;margin-bottom:4px}
+.hidden{display:none!important}
+.afterChoices{display:flex;flex-wrap:wrap;gap:7px}
+.favorite{padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
+.favorite:last-child{border-bottom:0}
+.footer{text-align:center;color:var(--muted);font-size:12px;padding:24px 0 0}
+.patteix{position:fixed;right:8px;bottom:5px;font-size:9px;opacity:.28;font-weight:800;letter-spacing:.08em}
+@media(max-width:470px){
+  .actions{grid-template-columns:1fr}
+  .grid2{grid-template-columns:1fr}
+  .toolgrid{grid-template-columns:repeat(2,1fr)}
+}
+@media(min-width:760px){.home{grid-template-columns:repeat(3,1fr)}.heroBtn{min-height:104px;align-items:flex-start}}
+</style>
+
+<style>
+.personalize-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(10,10,12,.66);
+  display:grid;place-items:center;
+  padding:18px;
+  backdrop-filter:blur(10px);
+}
+.personalize-card{
+  width:min(560px,100%);
+  background:var(--card);
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:20px;
+  box-shadow:0 24px 70px rgba(0,0,0,.28);
+}
+.personalize-card h2{margin:4px 0 8px}
+.personalize-card p{margin:0 0 12px;color:var(--muted);line-height:1.4}
+.personalize-overlay.hidden{display:none!important}
+
+/* perfis/estilos */
+body.persona-homem{
+  --accent-main:#2f6fed;
+  --accent-alt:#1f9d72;
+}
+body.persona-mulher{
+  --accent-main:#ef3f8f;
+  --accent-alt:#8a5cf6;
+}
+body.persona-neutro{
+  --accent-main:#53657d;
+  --accent-alt:#7b8798;
+}
+body.style-clean .home-main,
+body.style-clean .heroBtn{filter:saturate(.95)}
+body.style-dark{--bg:#101318;--card:#181d25;--ink:#f5f4ef;--muted:#a9adb5;--line:#343b46}
+body.style-colorido .home-main,
+body.style-colorido .heroBtn{filter:saturate(1.22) contrast(1.03)}
+body.style-romantico .home-main:first-child,
+body.style-romantico .heroBtn:first-child{box-shadow:0 10px 30px rgba(239,63,143,.24)}
+body.style-sem-frescuras .chip,
+body.style-sem-frescuras .tool,
+body.style-sem-frescuras .mini-btn{border-radius:10px}
+</style>
+
+</head>
+
+<body>
+<div id="personalizeOverlay" class="personalize-overlay">
+  <div class="personalize-card">
+    <div class="smart-kicker">PERSONALIZAR ALINHAS?</div>
+    <h2>Como queres que a app se apresente?</h2>
+    <p>Não retira funções. Só muda o que aparece primeiro, as cores e o tom inicial.</p>
+
+    <label>Perfil</label>
+    <div id="profileChoices" class="chips"></div>
+
+    <label>Estilo</label>
+    <div id="styleChoices" class="chips"></div>
+
+    <button id="savePersonalization" class="primary">Entrar na ALINHAS?</button>
+    <button id="skipPersonalization" class="ghost">Escolher depois</button>
+  </div>
+</div>
+
+<main class="app">
+  <header class="topbar">
+    <div>
+      <div class="brand">ALINHAS?</div>
+      <div class="tagline">Menos conversa seca. Mais planos reais.</div>
+    </div>
+    <div class="toptools">
+      <button id="langBtn" class="iconbtn">PT</button>
+      <button id="darkBtn" class="iconbtn">🌙</button>
+    </div>
+  </header>
+
+  <div class="daily"><span>FRASE DO DIA</span><strong id="dailyLine">A carregar sarcasmo…</strong></div>
+
+  <section class="home">
+    <button class="heroBtn pink" data-scroll="createSec"><span class="ico">✨</span><span><strong>Criar convite</strong><small>Pessoa + tom + ocasião</small></span></button>
+    <button class="heroBtn violet" data-scroll="todaySec"><span class="ico">🌦️</span><span><strong>O que fazemos hoje?</strong><small>Hora + humor + companhia</small></span></button>
+    <button class="heroBtn blue" data-scroll="nightSec"><span class="ico">🛟</span><span><strong>Salva-me a noite</strong><small>Tempo + orçamento e eu decido</small></span></button>
+  </section>
+
+  <section id="createSec" class="section">
+    <h2>Criar convite</h2><p class="sub">Rápido, pessoal e sem textos lamechas.</p>
+    <label>Nome</label><input id="name" placeholder="Nome da vítima… 😌">
+    <label>Para quem?</label><div id="rels" class="chips"></div>
+    <label>Tom</label><div id="tones" class="chips"></div>
+    <label>Tipo</label><div id="cats" class="chips"></div>
+<div id="customWrap" class="hidden"><label>Outro convite</label><input id="customType" placeholder="Ex.: ir ver o pôr do sol, karaoke, feira, viagem…"></div>
+    <button id="generate" class="primary">✨ Criar convite</button>
+    <button id="random" class="ghost">🎲 Estou sem ideias</button>
+  </section>
+
+  <section class="section">
+    <article id="inviteCard" class="invite">
+      <div id="meta" class="eyebrow">CAFÉ · SARCASMO · AMIGO/A</div>
+      <h1 id="title">Tomamos um café?</h1>
+      <p id="text">Sim? Glu glu… estava ótimo. Agora falta só marcar o verdadeiro. 😂</p>
+      <div class="signature">ALINHAS?</div>
+    </article>
+    <div class="actions">
+      <button id="copy">📋 Copiar</button>
+      <button id="share">📲 Partilhar</button>
+      <button id="fav">⭐ Favorito</button>
+    </div>
+    <div id="status" class="status">Pronta para testar.</div>
+  </section>
+
+  <section id="todaySec" class="section">
+    <h2>🌦️ O que fazemos hoje?</h2><p class="sub">Nesta versão local uso a hora + pessoa + humor. Quando estiver publicada, ligamos o tempo real.</p>
+    <button id="todayBtn" class="primary">Sugerir plano de hoje</button>
+    <div id="todayResult" class="result">Ainda não decidi nada por ti. 😌</div>
+  </section>
+
+  <section id="nightSec" class="section">
+    <h2>🛟 Salva-me a noite</h2>
+    <div class="grid2">
+      <div><label>Quanto tempo tens?</label><select id="time"><option value="30">30 min</option><option value="60" selected>1 hora</option><option value="120">2 horas</option><option value="180">A noite toda 😏</option></select></div>
+      <div><label>Orçamento</label><select id="budget"><option value="0">Grátis</option><option value="10" selected>Até 10 €</option><option value="25">Até 25 €</option><option value="50">Até 50 €</option></select></div>
+    </div>
+    <button id="nightBtn" class="primary">Decide por mim 😂</button>
+    <div id="nightResult" class="result">À espera da tua coragem.</div>
+  </section>
+
+  <section class="section">
+    <h2>💌 E depois?</h2><p class="sub">O plano acabou. Agora fecha o momento sem parecer um comunicado oficial.</p>
+    <div id="afterStates" class="afterChoices"></div>
+    <label>Tom da mensagem</label><div id="afterTones" class="chips"></div>
+    <button id="afterBtn" class="primary">Criar mensagem pós-plano</button>
+    <div id="afterResult" class="result">Ainda não aconteceu nada. Calma 😂</div>
+  </section>
+
+  <section class="section">
+    <h2>Ferramentas rápidas</h2>
+    <div class="toolgrid">
+      <button id="excuseBtn" class="tool"><span>🕵️</span>Desculpa</button>
+      <button id="payBtn" class="tool"><span>💸</span>Quem paga?</button>
+      <button id="spinBtn" class="tool"><span>🎡</span>Roleta</button>
+      <button id="planBBtn" class="tool"><span>🅱️</span>Plano B</button>
+      <button id="matchBtn" class="tool"><span>🤝</span>Alinhas comigo?</button>
+      <button id="challengeBtn" class="tool"><span>🎯</span>Desafio</button>
+    </div>
+    <div id="toolResult" class="result">Escolhe uma ferramenta.</div>
+  </section>
+
+  
+  <section class="section">
+    <h2>🧭 Mais formas de alinhar</h2>
+    <p class="sub">Porque nem sempre sabes o que queres — e às vezes essa é precisamente a graça 😂</p>
+
+    <div class="toolgrid">
+      <button id="moodBtn" class="tool"><span>💭</span>Hoje apetece-me…</button>
+      <button id="secretBtn" class="tool"><span>🤫</span>Plano secreto</button>
+      <button id="noReplyBtn" class="tool"><span>👻</span>Não respondeu</button>
+      <button id="homePlanBtn" class="tool"><span>🏠</span>Não quero sair</button>
+      <button id="whoBtn" class="tool"><span>👥</span>Quem convido?</button>
+      <button id="energyBtn" class="tool"><span>🔋</span>Por energia</button>
+      <button id="seasonBtn" class="tool"><span>🌦️</span>Por estação</button>
+      <button id="doItBtn" class="tool"><span>🎲</span>Faz por mim</button>
+      <button id="clueBtn" class="tool"><span>🧩</span>Convite com pistas</button>
+      <button id="battleBtn" class="tool"><span>⚔️</span>Batalha de planos</button>
+      <button id="thanksBtn" class="tool"><span>🙏</span>Agradecimento</button>
+      <button id="smallWinBtn" class="tool"><span>🥳</span>Pequena vitória</button>
+      <button id="talkBtn" class="tool"><span>🫶</span>Preciso de falar</button>
+      <button id="peaceBtn" class="tool"><span>🕊️</span>Fazer as pazes</button>
+      <button id="justBecauseBtn" class="tool"><span>✨</span>Só porque sim</button>
+      <button id="surpriseBtn" class="tool"><span>🎁</span>Surpreende alguém</button>
+    </div>
+
+    <div id="megaResult" class="result">Escolhe uma ideia e eu trato do resto 😎</div>
+  </section>
+
+  <section class="section">
+    <h2>👥 Modos</h2>
+    <p class="sub">O mesmo convite muda completamente consoante quem está do outro lado.</p>
+    <div id="modeChoices" class="chips"></div>
+    <div id="modeResult" class="result">Modo atual: Geral</div>
+  </section>
+
+  <section class="section">
+    <h2>🌟 Lista de desejos & memórias</h2>
+    <div class="grid2">
+      <div>
+        <label>Quero fazer um dia…</label>
+        <input id="wishInput" placeholder="Ex.: brunch com vista, concerto, viagem…">
+        <button id="wishSave" class="ghost">Guardar desejo</button>
+      </div>
+      <div>
+        <label>Memória de um plano</label>
+        <input id="memoryInput" placeholder="Ex.: café naquele sítio em outubro…">
+        <button id="memorySave" class="ghost">Guardar memória</button>
+      </div>
+    </div>
+    <div id="wishList" class="result">Ainda não tens desejos guardados.</div>
+    <div id="memoryList" class="result">Ainda não tens memórias guardadas.</div>
+  </section>
+
+  <section class="section">
+    <h2>📊 Estatísticas pouco científicas 😂</h2>
+    <button id="statsBtn" class="primary">Ver o meu relatório social</button>
+    <div id="statsResult" class="result">Ainda não há dados suficientes para te julgar. 😌</div>
+  </section>
+
+
+  <section class="section">
+    <h2>💌 Postais “Fica para a próxima”</h2>
+    <p class="sub">Quando a pessoa não vai, a ALINHAS? responde com graça, classe e zero amuo 😌</p>
+
+    <label>O que aconteceu?</label>
+    <div id="postalReasons" class="chips"></div>
+
+    <label>Estilo do postal</label>
+    <div id="postalStyles" class="chips"></div>
+
+    <button id="postalBtn" class="primary">Criar postal</button>
+    <div id="postalResult" class="result">Escolhe o motivo e o estilo para criar um postal bonito.</div>
+    <div class="actions" style="margin-top:10px">
+      <button id="postalCopy">📋 Copiar postal</button>
+      <button id="postalNew">🎲 Outro postal</button>
+      <button id="postalUse">✨ Usar como mensagem</button>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>🚀 Antes, durante e depois</h2>
+    <p class="sub">A ALINHAS? acompanha o plano todo sem te obrigar a pensar demais 😂</p>
+
+    <div class="toolgrid">
+      <button id="acceptedBtn" class="tool"><span>✅</span>Depois do sim</button>
+      <button id="countdownBtn" class="tool"><span>⏳</span>Contagem decrescente</button>
+      <button id="todayMsgBtn" class="tool"><span>📣</span>Hoje é dia</button>
+      <button id="tomorrowBtn" class="tool"><span>🌅</span>Dia seguinte</button>
+      <button id="emergencyBtn" class="tool"><span>🚨</span>Convite emergência</button>
+      <button id="repeatBtn" class="tool"><span>🔁</span>Repetir plano</button>
+    </div>
+
+    <div id="journeyResult" class="result">Escolhe uma opção para fechar o ciclo do convite.</div>
+  </section>
+
+  <section class="section">
+    <h2>👥 Grupo & decisão</h2>
+    <div class="toolgrid">
+      <button id="groupInviteBtn" class="tool"><span>👨‍👩‍👧‍👦</span>Convite grupo</button>
+      <button id="voteBtn" class="tool"><span>🗳️</span>Votação</button>
+      <button id="bringBtn" class="tool"><span>🧺</span>Quem leva o quê</button>
+      <button id="checklistBtn" class="tool"><span>✅</span>Checklist</button>
+      <button id="dressBtn" class="tool"><span>👗</span>Dress code</button>
+      <button id="kidsBtn" class="tool"><span>🧒</span>Com crianças</button>
+      <button id="dogBtn" class="tool"><span>🐶</span>Com cão</button>
+    </div>
+    <div id="groupResult" class="result">Planos a dois são fáceis. Os de grupo precisam de diplomacia 😂</div>
+  </section>
+
+  <section class="section">
+    <h2>📍 Local & contexto</h2>
+    <div class="toolgrid">
+      <button id="meetingPointBtn" class="tool"><span>📍</span>Ponto de encontro</button>
+      <button id="weatherOverrideBtn" class="tool"><span>🌦️</span>Tempo manual</button>
+      <button id="quietBtn" class="tool"><span>🤫</span>Zero conversa</button>
+      <button id="ventBtn" class="tool"><span>🫶</span>Preciso desabafar</button>
+      <button id="celebrateBtn" class="tool"><span>🥂</span>Quero celebrar</button>
+      <button id="escapeBtn" class="tool"><span>🏃</span>Quero fugir de casa</button>
+    </div>
+    <div id="contextResult" class="result">Escolhe o contexto e a app adapta o plano.</div>
+  </section>
+
+  <section class="section">
+    <h2>🎁 Convites especiais</h2>
+    <div class="toolgrid">
+      <button id="photoInviteBtn" class="tool"><span>📸</span>Com fotografia</button>
+      <button id="musicInviteBtn" class="tool"><span>🎵</span>Com música</button>
+      <button id="secretCodeBtn" class="tool"><span>🔐</span>Código secreto</button>
+      <button id="progressiveBtn" class="tool"><span>🧩</span>Pistas progressivas</button>
+      <button id="softBtn" class="tool"><span>🌿</span>Sem pressão</button>
+      <button id="boldBtn" class="tool"><span>🔥</span>Ousado</button>
+      <button id="formalBtn" class="tool"><span>🎩</span>Formal</button>
+    </div>
+    <div id="specialResult" class="result">Escolhe um estilo de convite especial.</div>
+  </section>
+
+  <section class="section">
+    <h2>🧠 Preferências & aprendizagem</h2>
+    <label>Humor preferido</label>
+    <div id="humorPrefs" class="chips"></div>
+    <label>Quanto queres conversar?</label>
+    <div id="talkPrefs" class="chips"></div>
+    <div class="actions">
+      <button id="neverAgainBtn">🚫 Nunca mais sugerir isto</button>
+      <button id="privateFeedbackBtn">📝 Feedback privado</button>
+      <button id="topBtn">🏆 Top usados</button>
+    </div>
+    <div id="prefResult" class="result">A app pode aprender contigo sem ficar pesada.</div>
+  </section>
+
+
+  <section class="section">
+    <h2>🎨 A minha ALINHAS?</h2>
+    <p class="sub">Muda o estilo quando quiseres. Todas as funções continuam disponíveis.</p>
+    <div id="currentPersona" class="result">Perfil: Geral · Estilo: Clean</div>
+    <button id="changePersonaBtn" class="ghost">Alterar personalização</button>
+  </section>
+
+<section class="section">
+    <h2>⭐ Favoritos</h2>
+    <div id="favList" class="result">Nenhum ainda.</div>
+  </section>
+
+  <div class="footer">Antes, durante e depois. Sem complicar.</div>
+  <div class="patteix">PatTeix</div>
+</main>
+
+<script>
+(function(){
+const rels=["Crush","Namorado/a","Marido/Mulher","Amigo/a","Família","Colega","Ex 👀"];
+const tones=["Natural","Sarcasmo","Fofo","Atrevido","Elegante","Sem paciência"];
+const cats=[
+"Café","Chá","Brunch","Pequeno-almoço","Almoço","Jantar","Sobremesa","Bar","Copos","Discoteca",
+"Cinema","Teatro","Concerto","Museu","Exposição","Passeio","Praia","Piquenique","Parque","Compras",
+"Festa em casa","Churrasco","Aniversário","Parabéns","Batizado","Casamento","Noivado","Baby shower","Chá de bebé",
+"Festa surpresa","Despedida de solteiro/a","Natal","Passagem de ano","Páscoa","São João","Halloween","Dia dos Namorados",
+"Dia da Mãe","Dia do Pai","Fim de curso","Jantar de família","Reunião de amigos","Jantar de colegas","After-work",
+"Networking","Reunião informal","Primeiro encontro","Encontro romântico","Reconciliação","Pedido de desculpas","Saudades",
+"Visitar alguém","Ver um bebé","Ver futebol","Jogo de futebol","Festa de crianças","Pijama","Passa cá em casa",
+"Vamos apanhar ar","Preciso de companhia","Hoje não quero ficar em casa","Tenho uma surpresa","Vens comigo?",
+"Só nós dois","Leva os miúdos","Traz o cão 😂","Última hora","Convite formal","Outro"
+];
+const afterStates=["Cheguei bem","Gostei","Quero repetir","Foi giro","Nunca mais 😂"];
+const afterTones=["Natural","Sarcasmo","Fofo","Atrevido","Elegante"];
+const daily=[
+"Se alguém disser “temos de combinar”, exige logo data e hora. 😂",
+"Planos vagos são só ficção científica social.",
+"Menos “vemos isso”. Mais “fica marcado”. 😎",
+"Hoje é um ótimo dia para trocar “um dia destes” por “às 18h?”."
+];
+let rel="Amigo/a",tone="Sarcasmo",cat="Café",after="Quero repetir",afterTone="Sarcasmo";
+const $=id=>document.getElementById(id);
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function chips(root,items,current,setter){
+  root.innerHTML="";
+  items.forEach(v=>{
+    const b=document.createElement("button"); b.className="chip"+(v===current?" active":""); b.textContent=v;
+    b.onclick=()=>{setter(v);chips(root,items,v,setter)};root.appendChild(b)
+  })
+}
+chips($("rels"),rels,rel,v=>rel=v);
+chips($("tones"),tones,tone,v=>tone=v);
+chips($("cats"),cats,cat,v=>{cat=v;$("customWrap").classList.toggle("hidden",cat!=="Outro")});
+chips($("afterStates"),afterStates,after,v=>after=v); chips($("afterTones"),afterTones,afterTone,v=>afterTone=v);
+$("dailyLine").textContent=daily[new Date().getDate()%daily.length];
+
+const bank={
+"Café":["Tomamos um café?","Agora falta só marcar o verdadeiro. ☕"],
+"Chá":["Vamos tomar um chá?","Uma chávena, boa conversa e zero pressa. 🫖"],
+"Brunch":["Brunch?","Pequeno-almoço que acordou tarde e decidiu ter classe. 😂"],
+"Pequeno-almoço":["Pequeno-almoço fora?","Começamos o dia com café, comida e conversa decente."],
+"Almoço":["Almoçamos?","Uma pausa a meio do dia sabe sempre melhor com companhia."],
+"Jantar":["Vamos jantar?","Comida boa e zero vontade de cozinhar. 😂"],
+"Sobremesa":["Vamos comer qualquer coisa doce?","Não é jantar. É uma decisão emocional perfeitamente válida. 🍰"],
+"Bar":["Bar?","Uma bebida, boa música e conversa sem notificações pelo meio."],
+"Copos":["Um copo?","Só um. A frase mais otimista da noite. 😂"],
+"Discoteca":["Vamos dançar?","Prometo não julgar os teus passos. Muito. 😂"],
+"Cinema":["Cinema?","Duas horas no escuro sem resolver a vida. Parece-me excelente. 🎬"],
+"Teatro":["Teatro?","Um programa diferente e, com sorte, muito menos drama do que na vida real."],
+"Concerto":["Concerto?","Música alta, boa energia e depois fingimos que ainda ouvimos bem. 😂"],
+"Museu":["Museu?","Cultura, passeio e comentários pouco académicos pelo caminho."],
+"Exposição":["Vamos ver uma exposição?","Arte, conversa e a oportunidade de fingirmos que percebemos tudo. 😌"],
+"Passeio":["Vamos dar uma volta?","Ar fresco, pernas a mexer e conversa sem notificações pelo meio."],
+"Praia":["Praia?","Sol, mar e um excelente motivo para desligar do mundo."],
+"Piquenique":["Piquenique?","Comida simples, relva e uma tentativa séria de parecer organizado/a. 😂"],
+"Parque":["Vamos ao parque?","Um plano simples, barato e surpreendentemente eficaz."],
+"Compras":["Vamos às compras?","Preciso de companhia e, provavelmente, de alguém que me impeça de comprar disparates. 😂"],
+"Festa em casa":["Festa cá em casa?","Boa companhia, música e zero necessidade de apanhar táxi para voltar."],
+"Churrasco":["Churrasco?","Carne, conversa e alguém inevitavelmente a discutir como se acende o carvão. 😂"],
+"Aniversário":["É aniversário 🎉","Quero-te lá. A presença é obrigatória e as desculpas serão avaliadas."],
+"Parabéns":["Vamos celebrar?","Há motivos para brindar e eu prefiro fazê-lo contigo."],
+"Batizado":["Convite especial","Gostávamos muito de contar contigo neste dia tão importante para a família."],
+"Casamento":["Temos casamento 💍","Vai haver emoção, comida, música e queremos-te connosco nesse dia."],
+"Noivado":["Vamos celebrar o noivado?","Há um sim importante para festejar. E queremos fazê-lo com boa companhia."],
+"Baby shower":["Baby shower 🍼","Vem celebrar connosco esta nova aventura antes de começar o caos fofo."],
+"Chá de bebé":["Chá de bebé","Uma tarde bonita, cheia de carinho e expectativas pequeninas. 🤍"],
+"Festa surpresa":["Segredo 🤫","Há uma festa surpresa. Finge que não sabes de nada e aparece a horas."],
+"Despedida de solteiro/a":["Última chamada 😂","Antes do casamento, ainda há uma noite para criar histórias que não entram no discurso."],
+"Natal":["Natal juntos? 🎄","Comida a mais, família, risos e espaço para mais uma pessoa à mesa."],
+"Passagem de ano":["Passamos o ano juntos? ✨","Começar o próximo ano com boa companhia parece-me um excelente plano."],
+"Páscoa":["Páscoa? 🐣","Comida, família e uma desculpa oficial para repetir a sobremesa."],
+"São João":["São João? 🎈","Martelinhos, sardinhas, confusão e um plano impossível de fazer em silêncio."],
+"Halloween":["Halloween? 🎃","Fantasia opcional. Má ideia obrigatória. 😂"],
+"Dia dos Namorados":["Dia dos Namorados? ❤️","Sem clichés obrigatórios. Só quero passar esse tempo contigo."],
+"Dia da Mãe":["Dia da Mãe 🤍","Quero passar um bocadinho contigo. Hoje és tu quem manda."],
+"Dia do Pai":["Dia do Pai 🤍","Um convite simples para estarmos juntos e criar mais uma memória boa."],
+"Fim de curso":["Acabou! 🎓","Sobrevivemos. Agora é oficialmente permitido celebrar."],
+"Jantar de família":["Jantar de família?","Mesa cheia, opiniões não solicitadas e, com sorte, sobremesa boa. 😂"],
+"Reunião de amigos":["Reunião de amigos?","Está na hora de atualizar a conversa antes que vire arquivo histórico."],
+"Jantar de colegas":["Jantar de colegas?","Sem reuniões, sem Excel e sem assunto “urgente” depois das 18h."],
+"After-work":["After-work?","Fechamos o portátil e abrimos uma conversa que não tenha deadline."],
+"Networking":["Vamos fazer networking?","Conhecer pessoas, trocar ideias e fingir que não estamos todos a improvisar um bocadinho. 😎"],
+"Reunião informal":["Café de trabalho?","Sem sala de reuniões, sem PowerPoint e com café decente."],
+"Primeiro encontro":["Primeiro encontro?","Sem pressão. Um sítio agradável, conversa e logo se vê."],
+"Encontro romântico":["Um encontro?","Quero reservar umas horas só para nós."],
+"Reconciliação":["Falamos?","Sem orgulho, sem discursos enormes. Um café e uma conversa honesta."],
+"Pedido de desculpas":["Posso compensar?","Um convite não apaga tudo, mas pode ser um bom começo."],
+"Saudades":["Tenho saudades","Isto é um convite mal disfarçado para apareceres. 😌"],
+"Visitar alguém":["Posso passar por aí?","Prometo não aparecer de mãos a abanar. Em princípio. 😂"],
+"Ver um bebé":["Vamos conhecer o bebé?","Prometo admirar em silêncio e perguntar antes de pegar. 🤍"],
+"Ver futebol":["Vemos o jogo? ⚽","Tu levas a opinião forte. Eu trato do resto."],
+"Jogo de futebol":["Vamos ao jogo? ⚽","Noventa minutos de esperança, nervos e comentários de treinador de bancada."],
+"Festa de crianças":["Festa dos miúdos 🎈","Vai haver açúcar, barulho e muita energia. Vens? 😂"],
+"Pijama":["Noite do pijama?","Roupa confortável, snacks e zero necessidade de parecer apresentável."],
+"Passa cá em casa":["Passa cá em casa","Nada formal. Só aparece e traz conversa."],
+"Vamos apanhar ar":["Vamos apanhar ar?","Nem tudo se resolve com um passeio, mas ajuda bastante."],
+"Preciso de companhia":["Preciso de companhia","Sem grandes explicações. Só não me apetece estar sozinho/a."],
+"Hoje não quero ficar em casa":["Hoje não quero ficar em casa","Por isso escolhe sapatos e vem comigo. 😂"],
+"Tenho uma surpresa":["Tenho uma surpresa","Não perguntes demasiado. Só diz que sim. 😏"],
+"Vens comigo?":["Vens comigo?","Não te vou contar tudo já. Faz parte do charme."],
+"Só nós dois":["Só nós dois?","Sem grupo, sem confusão, sem logística. Só nós."],
+"Leva os miúdos":["Leva os miúdos","Plano para adultos com pequenas criaturas incluídas. 😂"],
+"Traz o cão 😂":["Traz o cão 😂","Tu és convidado/a. O cão é claramente VIP."],
+"Última hora":["Plano de última hora","Tens pouco tempo para pensar e ainda menos para inventar desculpas. 😂"],
+"Convite formal":["Gostaria de te convidar","Seria um prazer contar com a tua presença."],
+"Outro":["Tenho um convite","Diz-me o plano e eu trato do resto. 😎"]
+};
+function buildInvite(){
+  let [t,x]=bank[cat];
+  if(cat==="Outro"){
+    const custom=$("customType").value.trim();
+    if(custom){
+      t="Alinhas em "+custom+"?";
+      x="Tenho este plano em mente e achei que eras a companhia certa. 😎";
+    }
+  }
+  const n=$("name").value.trim(); if(n)t+=", "+n;
+  if(tone==="Sarcasmo")x+=" Porque aparentemente combinar coisas ainda é permitido. 😂";
+  if(tone==="Fofo")x+=" O importante é mesmo a companhia. 🤍";
+  if(tone==="Atrevido")x+=" E o resto logo se vê. 😏";
+  if(tone==="Elegante")x=x.replace("😂","")+" Sem pressas e com boa companhia.";
+  if(tone==="Sem paciência")x="Dia. Hora. Local. Fechado? 😌";
+  if(rel==="Crush")x+=" Boa desculpa para finalmente sairmos do chat.";
+  if(rel==="Ex 👀")x+=" Sim, eu sei. Pode ser uma péssima ideia. 👀";
+  $("meta").textContent=`${cat.toUpperCase()} · ${tone.toUpperCase()} · ${rel.toUpperCase()}`;
+  $("title").textContent=t;$("text").textContent=x;$("status").textContent="Convite criado ✅";
+}
+$("generate").onclick=buildInvite;
+$("random").onclick=()=>{
+  rel=pick(rels);tone=pick(tones);cat=pick(cats);
+  chips($("rels"),rels,rel,v=>rel=v);
+chips($("tones"),tones,tone,v=>tone=v);
+chips($("cats"),cats,cat,v=>{cat=v;$("customWrap").classList.toggle("hidden",cat!=="Outro")});
+$("customWrap").classList.toggle("hidden",cat!=="Outro");
+buildInvite()
+};
+function inviteText(){return $("title").textContent+"\n\n"+$("text").textContent+"\n\n— ALINHAS?"}
+$("copy").onclick=async()=>{
+  try{await navigator.clipboard.writeText(inviteText());$("status").textContent="Copiado ✅"}
+  catch(e){$("status").textContent="O navegador local bloqueou a cópia automática. Mantém o dedo no texto para copiar."}
+};
+$("share").onclick=async()=>{
+  try{
+    if(navigator.share){await navigator.share({title:"ALINHAS?",text:inviteText()});$("status").textContent="Partilha aberta ✅"}
+    else{await navigator.clipboard.writeText(inviteText());$("status").textContent="Sem menu de partilha aqui; copiei o convite ✅"}
+  }catch(e){}
+};
+function getFavs(){try{return JSON.parse(localStorage.getItem("alinhas_v13_favs")||"[]")}catch(e){return[]}}
+function saveFavs(f){
+  try{localStorage.setItem("alinhas_v13_favs",JSON.stringify(f.slice(0,10)))}catch(e){}
+}
+function renderFavs(){
+  let f=getFavs();
+  // Remove duplicados antigos automaticamente
+  const seen=new Set();
+  f=f.filter(x=>{
+    const k=(x.t||"")+"|||"+(x.x||"");
+    if(seen.has(k)) return false;
+    seen.add(k); return true;
+  });
+  saveFavs(f);
+  $("favList").innerHTML=f.length?f.map((x,i)=>`
+    <div class="favorite">
+      <strong>${x.t}</strong><br>${x.x}
+      <div style="margin-top:8px">
+        <button class="chip" onclick="removeFav(${i})">🗑️ Remover</button>
+      </div>
+    </div>`).join(""):"Nenhum ainda.";
+}
+window.removeFav=(i)=>{
+  const f=getFavs();
+  f.splice(i,1);
+  saveFavs(f);
+  renderFavs();
+  $("status").textContent="Favorito removido.";
+};
+$("fav").onclick=()=>{
+  const atual={t:$("title").textContent,x:$("text").textContent};
+  let f=getFavs();
+  const existe=f.some(x=>x.t===atual.t && x.x===atual.x);
+  if(existe){
+    $("status").textContent="Este convite já está nos favoritos ⭐";
+    return;
+  }
+  f.unshift(atual);
+  saveFavs(f);
+  renderFavs();
+  $("status").textContent="Guardado nos favoritos ⭐";
+};
+renderFavs();
+
+document.querySelectorAll("[data-scroll]").forEach(b=>b.onclick=()=>$(b.dataset.scroll).scrollIntoView({behavior:"smooth",block:"start"}));
+$("darkBtn").onclick=()=>{document.body.classList.toggle("dark");$("darkBtn").textContent=document.body.classList.contains("dark")?"☀️":"🌙"};
+$("langBtn").onclick=()=>{$("langBtn").textContent=$("langBtn").textContent==="PT"?"EN":"PT";$("status").textContent="O inglês completo entra na versão publicada. Esta prévia mantém o conteúdo em português."};
+
+$("todayBtn").onclick=()=>{
+  const h=new Date().getHours();let p=h<12?"Café e passeio curto para começar o dia.":h<18?"Esplanada, passeio ou sobremesa.":h<21?"Fim de tarde: bebida, café ou jantar.":"Jantar, cinema ou conversa num sítio acolhedor.";
+  if(rel==="Crush")p+=" Com crush? Escolhe um sítio onde dê para conversar. 😏";
+  if(tone==="Sarcasmo")p+=" Milagre: um plano concreto. 😂";
+  $("todayResult").textContent=p
+};
+const plans=[
+ {n:"Passeio grátis",cost:0,min:30},{n:"Café",cost:5,min:30},{n:"Gelado + caminhada",cost:8,min:60},
+ {n:"Jantar simples",cost:20,min:60},{n:"Cinema",cost:15,min:120},{n:"Petisco + bebida",cost:18,min:120}
+];
+$("nightBtn").onclick=()=>{
+  const t=+$("time").value,b=+$("budget").value;let ok=plans.filter(p=>p.cost<=b&&p.min<=t);if(!ok.length)ok=plans.filter(p=>p.cost<=b);if(!ok.length)ok=plans;
+  const p=pick(ok);$("nightResult").textContent=`Escolhido: ${p.n}. A app falou. Caso encerrado. 😂`
+};
+
+$("afterBtn").onclick=()=>{
+  let m={
+   "Cheguei bem":"Já cheguei bem 😊 Gostei da companhia. Chegaste bem?",
+   "Gostei":"Gostei mesmo de estar contigo. Foi suspeitosamente agradável 😂",
+   "Quero repetir":"Gostei. Repetimos antes de voltar ao clássico “temos de combinar”? 😂",
+   "Foi giro":"Foi giro 😊 Obrigada/o pelo plano.",
+   "Nunca mais 😂":"Foi uma experiência. Algumas experiências não precisam de segunda temporada 😂"
+  }[after];
+  if(afterTone==="Fofo")m=m.replaceAll("😂","🤍");
+  if(afterTone==="Elegante")m="Obrigada/o pela companhia. Foi um momento muito agradável.";
+  if(afterTone==="Atrevido"&&after==="Quero repetir")m+=" E sim… repetia sem pensar muito. 😏";
+  if(rel==="Crush"&&after==="Quero repetir")m+=" Gostei mais do que devia. 😏";
+  $("afterResult").textContent=m
+};
+
+$("excuseBtn").onclick=()=>{$("toolResult").textContent="Desculpa premium: “Hoje não consigo. A minha bateria social entrou em modo avião.” 😂"};
+$("payBtn").onclick=()=>{$("toolResult").textContent="💸 "+pick(["Eu pago 😎","Tu pagas 😌","Cada um o seu — paz mundial 😂","Pedra, papel, tesoura. Sem recurso."])};
+$("spinBtn").onclick=()=>{$("toolResult").textContent="🎡 A roleta escolheu: "+pick(["Café ☕","Cinema 🎬","Passeio 🚶","Jantar 🍽️","Sobremesa 🍰","Copos 🍹"])};
+$("planBBtn").onclick=()=>{$("toolResult").textContent="🅱️ Plano B: "+pick(["café rápido","passeio curto","sobremesa fora","filme em casa","gelado e conversa"])+"."};
+$("matchBtn").onclick=()=>{$("toolResult").textContent="🤝 Alinhas comigo?: cada pessoa escolhe em segredo; revela só as opções em comum. Na versão publicada fazemos isto a dois toques."};
+$("challengeBtn").onclick=()=>{$("toolResult").textContent="🎯 "+pick(["Convida alguém que não vês há 3 meses.","Faz um convite sem dizer “temos de combinar”.","Escolhe hoje um plano gratuito.","Convida alguém que te faz rir."])};
+
+const megaModes=["Geral","Casal","Amigas","Família","Trabalho","Crianças"];
+let megaMode="Geral";
+chips($("modeChoices"),megaModes,megaMode,v=>{
+  megaMode=v;
+  $("modeResult").textContent="Modo atual: "+megaMode;
+});
+
+const moodPlans={
+  "rir":"Stand-up, bar divertido ou jogo em casa.",
+  "conversar":"Café tranquilo ou passeio sem pressa.",
+  "descansar":"Chá, filme em casa ou sobremesa num sítio sossegado.",
+  "dançar":"Bar com música ou discoteca.",
+  "comer":"Brunch, jantar ou sobremesa.",
+  "silêncio":"Passeio, parque ou cinema."
+};
+
+$("moodBtn").onclick=()=>{
+  const opts=Object.keys(moodPlans); const m=pick(opts);
+  $("megaResult").textContent=`💭 Hoje apetece-te ${m}: ${moodPlans[m]}`;
+};
+$("secretBtn").onclick=()=>{
+  $("megaResult").textContent="🤫 Plano secreto: envia só isto — “Tenho um plano. Roubo-te 2 horas. Confias em mim?”";
+};
+$("noReplyBtn").onclick=()=>{
+  $("megaResult").textContent=pick([
+    "👻 Follow-up: “Só para confirmar que não foste raptado/a 😂”",
+    "👻 “Prometo que isto não é cobrança. Só preciso de saber se marco ou invento outro plano 😌”",
+    "👻 “Última chamada antes de eu interpretar o silêncio como voto pela sesta 😂”"
+  ]);
+};
+$("homePlanBtn").onclick=()=>{
+  $("megaResult").textContent="🏠 Plano em casa: "+pick([
+    "filme + snacks","chá + conversa","cozinhar juntos","jogo de tabuleiro","videochamada longa",
+    "jantar simples em casa","playlist + conversa","sobremesa e sofá"
+  ])+".";
+};
+$("whoBtn").onclick=()=>{
+  $("megaResult").textContent="👥 Hoje convida: "+pick(["uma amiga de quem tens saudades","alguém da família","um colega com quem te dás bem","aquela pessoa com quem andas a adiar um café","alguém que te faz rir"])+".";
+};
+$("energyBtn").onclick=()=>{
+  $("megaResult").textContent="🔋 Energia recomendada: "+pick([
+    "15 min — café rápido","30 min — passeio curto","1 hora — brunch/café","2 horas — cinema ou jantar","zero energia — filme em casa 😂"
+  ]);
+};
+$("seasonBtn").onclick=()=>{
+  $("megaResult").textContent="🌦️ Plano da estação: "+pick([
+    "verão — praia ou esplanada","inverno — chocolate quente ou cinema","chuva — café junto à janela","noite quente — passeio depois do jantar","frio — jantar acolhedor"
+  ]);
+};
+$("doItBtn").onclick=()=>{
+  $("megaResult").textContent="🎲 Decidi por ti: "+pick([
+    "café às 18h","brunch este fim de semana","passeio + gelado","jantar simples","cinema","chá e conversa em casa"
+  ])+". Sem comité de decisão. 😂";
+};
+$("clueBtn").onclick=()=>{
+  $("megaResult").textContent="🧩 Pistas do convite: 1) não precisas de fato. 2) envolve comida. 3) convém ter fome. Resposta: jantar 😎";
+};
+$("battleBtn").onclick=()=>{
+  const a=pick(["Café","Cinema","Brunch","Passeio","Jantar","Praia"]);
+  const b=pick(["Chá","Bar","Museu","Concerto","Sobremesa","Parque"]);
+  $("megaResult").textContent=`⚔️ ${a} VS ${b}. Escolhe sem pensar. O vencedor manda.`;
+};
+$("thanksBtn").onclick=()=>{
+  $("megaResult").textContent="🙏 “Queria agradecer-te como deve ser. Aceitas um café/jantar por minha conta?”";
+};
+$("smallWinBtn").onclick=()=>{
+  $("megaResult").textContent="🥳 Pequena vitória: "+pick([
+    "sobrevivemos à semana","acabaste um projeto","boa notícia","fim de exames","resolveste aquela chatice"
+  ])+". Isto merece qualquer coisa boa.";
+};
+$("talkBtn").onclick=()=>{
+  $("megaResult").textContent="🫶 “Preciso de falar contigo com calma. Podemos tomar um café quando tiveres tempo?”";
+};
+$("peaceBtn").onclick=()=>{
+  $("megaResult").textContent="🕊️ “Não quero deixar isto assim. Podemos conversar sem pressa? Um café e começamos por aí.”";
+};
+$("justBecauseBtn").onclick=()=>{
+  $("megaResult").textContent="✨ “Não há aniversário, notícia nem desculpa. Só me apeteceu estar contigo. Alinhas?”";
+};
+$("surpriseBtn").onclick=()=>{
+  $("megaResult").textContent="🎁 “Não faças planos para umas horas. Eu trato do resto. Só preciso de um sim.”";
+};
+
+function listStore(key){
+  try{return JSON.parse(localStorage.getItem(key)||"[]")}catch(e){return[]}
+}
+function saveList(key,arr){
+  try{localStorage.setItem(key,JSON.stringify(arr.slice(0,20)))}catch(e){}
+}
+function renderWishMemory(){
+  const w=listStore("alinhas_wishes");
+  const m=listStore("alinhas_memories");
+  $("wishList").innerHTML=w.length?w.map(x=>`<div class="favorite">${x}</div>`).join(""):"Ainda não tens desejos guardados.";
+  $("memoryList").innerHTML=m.length?m.map(x=>`<div class="favorite">${x}</div>`).join(""):"Ainda não tens memórias guardadas.";
+}
+$("wishSave").onclick=()=>{
+  const v=$("wishInput").value.trim(); if(!v)return;
+  const a=listStore("alinhas_wishes"); a.unshift(v); saveList("alinhas_wishes",a); $("wishInput").value=""; renderWishMemory();
+};
+$("memorySave").onclick=()=>{
+  const v=$("memoryInput").value.trim(); if(!v)return;
+  const a=listStore("alinhas_memories"); a.unshift(v); saveList("alinhas_memories",a); $("memoryInput").value=""; renderWishMemory();
+};
+renderWishMemory();
+
+$("statsBtn").onclick=()=>{
+  const f=getFavs().length;
+  const w=listStore("alinhas_wishes").length;
+  const m=listStore("alinhas_memories").length;
+  $("statsResult").textContent=`📊 Tens ${f} favoritos, ${w} planos na lista de desejos e ${m} memórias guardadas. Diagnóstico: ${f+w+m>8?"vida social em andamento 😎":"ainda há muito café por marcar 😂"}`;
+};
+
+
+const postalReasonsList=["Não pode","Cancelou em cima da hora","Disse talvez","Não respondeu","Foi adiado","Fica para outro dia"];
+const postalStylesList=["Fofo","Elegante","Leve","Sarcástico simpático","Crush","Amizade"];
+let postalReason="Não pode";
+let postalStyle="Leve";
+let currentPostal="";
+
+chips($("postalReasons"),postalReasonsList,postalReason,v=>postalReason=v);
+chips($("postalStyles"),postalStylesList,postalStyle,v=>postalStyle=v);
+
+const postalTemplates = {
+  "Não pode": {
+    "Fofo":[
+      "Tudo bem 🤍 Não deu hoje, mas a vontade de te ver continua aqui. Fica para a próxima?",
+      "Sem problema 😊 O convite continua bonito e a companhia continua desejada."
+    ],
+    "Elegante":[
+      "Compreendo perfeitamente. Ficará para outra ocasião, com o mesmo gosto em convidar.",
+      "Sem qualquer problema. Guardamos este plano para um momento mais oportuno."
+    ],
+    "Leve":[
+      "Não deu desta vez 😌 Mas o plano fica em banho-maria para outro dia.",
+      "Tranquilo. O convite não fugiu e a ideia continua ótima para a próxima."
+    ],
+    "Sarcástico simpático":[
+      "Cancelado com classe 😂 O plano não aconteceu, mas a minha elegância social mantém-se impecável.",
+      "Tudo bem. Vou fingir maturidade emocional e sugerir que tentemos noutra altura 😌"
+    ],
+    "Crush":[
+      "Não faz mal 😏 Fica só oficialmente registado que eu tinha uma ótima ideia.",
+      "Tudo bem. Considera isto apenas um adiamento estratégico do nosso plano 😌"
+    ],
+    "Amizade":[
+      "Não deu hoje, mas isso só significa que a próxima conversa vai render o dobro 😂",
+      "Sem stress. Amigos de qualidade sobrevivem a agendas caóticas 😎"
+    ]
+  },
+  "Cancelou em cima da hora": {
+    "Fofo":[
+      "Está tudo bem 🤍 Espero só que estejas bem. Reagendamos sem dramas.",
+      "Acontece 😊 O mais importante é que fique para um dia mais tranquilo."
+    ],
+    "Elegante":[
+      "Sem problema. Imprevistos acontecem e o convite poderá ficar para outra ocasião.",
+      "Compreendo. Reagendamos com calma quando for mais conveniente."
+    ],
+    "Leve":[
+      "Acontece 😌 O plano tropeçou hoje, mas pode levantar-se noutra data.",
+      "Sem crise. Guardo a ideia e resgatamo-la mais à frente."
+    ],
+    "Sarcástico simpático":[
+      "Cancelamento premium de última hora 😂 Ainda assim, continuo civilizado/a o suficiente para remarcar.",
+      "Muito em cima, sim 😌 Mas vou atribuir isto ao caos moderno e seguir em frente com classe."
+    ],
+    "Crush":[
+      "Cancelaste em cima da hora, mas ainda tens hipótese de recuperar essa imagem 😏",
+      "Eu estava com uma ótima ideia na manga… fica o suspense para a próxima 👀"
+    ],
+    "Amizade":[
+      "Muito bonito cancelar assim 😂 Mas pronto, continuas convidado/a para a próxima.",
+      "Anotado: hoje escolheste o caos. Reagendamos quando voltares à civilização 😂"
+    ]
+  },
+  "Disse talvez": {
+    "Fofo":[
+      "Talvez já é meio caminho andado 😊 Quando isso virar “sim”, eu trato do resto.",
+      "Fico à espera desse talvez a amadurecer com carinho 🤍"
+    ],
+    "Elegante":[
+      "Fica então em aberto. Quando tiveres mais certeza, combinamos com calma.",
+      "Perfeitamente. Mantemos a ideia em suspenso até surgir uma melhor oportunidade."
+    ],
+    "Leve":[
+      "Talvez não é não… por isso ainda há esperança 😌",
+      "Recebido: estamos oficialmente na zona cinzenta. Eu aguento 😂"
+    ],
+    "Sarcástico simpático":[
+      "O clássico “talvez” — esse monumento nacional à indecisão 😂",
+      "Adoro um bom “talvez”. Dá-me sempre aquela emoção burocrática de não saber nada 😌"
+    ],
+    "Crush":[
+      "Vou interpretar esse talvez como um sim tímido 😏",
+      "Talvez? Hmmm… gosto de viver perigosamente, vou guardar esse como meio-alinhado/a 👀"
+    ],
+    "Amizade":[
+      "Esse talvez cheira a agenda caótica 😂 Quando vira resposta decente, avisa-me.",
+      "Amigos verdadeiros sobrevivem a “talvez”. Mas só até certo ponto 😎"
+    ]
+  },
+  "Não respondeu": {
+    "Fofo":[
+      "Sem pressão 🤍 Só deixo o convite aqui, caso a vida te tenha engolido por completo.",
+      "Talvez ainda não tenhas visto. Quando vires, logo me dizes 😊"
+    ],
+    "Elegante":[
+      "Apenas retomo o convite com toda a tranquilidade. Quando puderes, diz-me algo.",
+      "Sem qualquer urgência. Quando te for possível, agradeço uma resposta."
+    ],
+    "Leve":[
+      "Talvez o convite esteja perdido no meio da vida 😌 Fica aqui o lembrete simpático.",
+      "Só para confirmar que o meu convite não caiu num buraco negro social 😂"
+    ],
+    "Sarcástico simpático":[
+      "Não sei se foste raptado/a ou só ignoraste isto com charme 😂",
+      "Passo aqui apenas para verificar se o silêncio é filosófico ou logístico 😌"
+    ],
+    "Crush":[
+      "Vou fingir que o silêncio é mistério e não desinteresse 😏",
+      "Não respondeste, mas continuo a achar que este plano tinha potencial 👀"
+    ],
+    "Amizade":[
+      "Se isto for ghosting entre amigos, vou ficar profundamente ofendido/a por uns 7 minutos 😂",
+      "Estou a dar-te a oportunidade de responder antes de eu dramatizar em silêncio 😎"
+    ]
+  },
+  "Foi adiado": {
+    "Fofo":[
+      "Adiado não é perdido 🤍 Guardamos o plano para quando souber ainda melhor.",
+      "Tudo bem 😊 Às vezes a melhor parte é sabermos que ainda há próxima."
+    ],
+    "Elegante":[
+      "Fica então adiado para uma ocasião mais adequada. O convite mantém-se.",
+      "Sem problema. Reagendamos quando for mais conveniente para ambos."
+    ],
+    "Leve":[
+      "O plano entrou em pausa 😌 Mas continua vivo e recomendável.",
+      "Adiado, sim. Esquecido, não 😂"
+    ],
+    "Sarcástico simpático":[
+      "O plano foi promovido a “temporariamente indisponível” 😂",
+      "Nada mau: não falhou, apenas foi remarcado com dramatização moderada 😌"
+    ],
+    "Crush":[
+      "Adiado só torna a próxima vez mais interessante 😏",
+      "Tudo bem. O suspense até me fica bem 👀"
+    ],
+    "Amizade":[
+      "Adiado entre amigos é só um aquecimento 😂",
+      "Fica em standby, como tantas boas ideias nossas 😎"
+    ]
+  },
+  "Fica para outro dia": {
+    "Fofo":[
+      "Fica para outro dia 🤍 e eu continuo a achar que vai valer a pena.",
+      "Sem problema 😊 Às vezes os bons planos só escolhem melhor a data."
+    ],
+    "Elegante":[
+      "Ficará então para outro dia, com todo o gosto.",
+      "Combinado. Guardamos a ideia para uma ocasião futura."
+    ],
+    "Leve":[
+      "Fica para outro dia 😌 o que, convenhamos, também é um clássico da vida social.",
+      "Fechado. Hoje não, mas em breve sim."
+    ],
+    "Sarcástico simpático":[
+      "Fica para outro dia — o lema oficial de metade dos nossos planos 😂",
+      "Ah, o famoso “outro dia”. Personagem recorrente e muito ocupada 😌"
+    ],
+    "Crush":[
+      "Fica para outro dia… e eu vou fingir que isso não me deixou ainda mais curioso/a 😏",
+      "Tudo bem. O “outro dia” também pode ser bastante promissor 👀"
+    ],
+    "Amizade":[
+      "Fica para outro dia, porque a nossa agenda e a nossa vontade raramente andam sincronizadas 😂",
+      "Com amigos assim, os planos não morrem. Só fazem fila 😎"
+    ]
+  }
+};
+
+function generatePostal(){
+  const options = postalTemplates[postalReason][postalStyle];
+  currentPostal = pick(options);
+  $("postalResult").textContent = currentPostal;
+}
+$("postalBtn").onclick = generatePostal;
+$("postalNew").onclick = generatePostal;
+$("postalCopy").onclick = async()=>{
+  if(!currentPostal) generatePostal();
+  try{
+    await navigator.clipboard.writeText(currentPostal);
+    $("postalResult").textContent = currentPostal + " ✅ Copiado";
+  }catch(e){
+    $("postalResult").textContent = currentPostal + " (Se não copiou automaticamente, mantém o dedo e copia manualmente.)";
+  }
+};
+$("postalUse").onclick = ()=>{
+  if(!currentPostal) generatePostal();
+  $("afterResult").textContent = currentPostal;
+};
+
+
+const humorPrefList=["Mais sarcástico","Equilibrado","Mais fofo","Mais direto"];
+const talkPrefList=["15 min","Café rápido","1 hora","Tarde inteira","Zero conversa"];
+let humorPref="Equilibrado";
+let talkPref="1 hora";
+chips($("humorPrefs"),humorPrefList,humorPref,v=>{humorPref=v;$("prefResult").textContent="Humor preferido: "+humorPref});
+chips($("talkPrefs"),talkPrefList,talkPref,v=>{talkPref=v;$("prefResult").textContent="Duração social preferida: "+talkPref});
+
+$("acceptedBtn").onclick=()=>{$("journeyResult").textContent=pick([
+  "✅ “Está combinado 😎 Agora já não podes fugir.”",
+  "✅ “Fechado. Dia, hora e boa disposição. O resto improvisamos.”",
+  "✅ “Perfeito. Já temos plano — metade da batalha está ganha 😂”"
+])};
+
+$("countdownBtn").onclick=()=>{
+  const mins=pick([30,60,120,180]);
+  $("journeyResult").textContent=`⏳ Faltam ${mins} minutos para o plano. Ainda vais a tempo de desistir… brincadeira 😂`;
+};
+
+$("todayMsgBtn").onclick=()=>{$("journeyResult").textContent="📣 “Hoje é dia 😏 Até logo. Não inventes uma reunião de emergência.”"};
+$("tomorrowBtn").onclick=()=>{$("journeyResult").textContent=pick([
+  "🌅 “Ainda a pensar no plano de ontem. Repetia.”",
+  "🌅 “Ontem foi bom. O relatório oficial diz: aprovado 😎”",
+  "🌅 “Só vim confirmar que ontem aconteceu mesmo e não foi imaginação 😂”"
+])};
+
+$("emergencyBtn").onclick=()=>{
+  $("journeyResult").textContent="🚨 Convite emergência: “Café daqui a 30 minutos? Escolhe um sítio perto e eu apareço.”";
+};
+
+$("repeatBtn").onclick=()=>{$("journeyResult").textContent="🔁 “Repetimos o último plano? Desta vez com menos improviso. Ou não 😂”"};
+
+$("groupInviteBtn").onclick=()=>{$("groupResult").textContent="👥 “Pessoal, plano simples: jantar + conversa. Quem alinha?”"};
+$("voteBtn").onclick=()=>{$("groupResult").textContent="🗳️ Votação: Café ☕ / Jantar 🍽️ / Cinema 🎬. Ganha o mais votado e ninguém reclama."};
+$("bringBtn").onclick=()=>{$("groupResult").textContent="🧺 Quem leva o quê: bebidas / snacks / sobremesa / gelo / boa disposição 😂"};
+$("checklistBtn").onclick=()=>{$("groupResult").textContent="✅ Checklist: reservar • confirmar hora • comprar bilhetes • confirmar presença • levar presente se necessário."};
+$("dressBtn").onclick=()=>{$("groupResult").textContent="👗 Dress code: "+pick(["Casual","Elegante","Confortável","Vem como estás","Roupa que aguente sobremesa 😂"])+"."};
+$("kidsBtn").onclick=()=>{$("groupResult").textContent="🧒 Plano adaptado: parque, brunch familiar, cinema infantil, gelado ou passeio curto."};
+$("dogBtn").onclick=()=>{$("groupResult").textContent="🐶 Plano com cão: passeio, parque, esplanada pet-friendly ou piquenique."};
+
+$("meetingPointBtn").onclick=()=>{$("contextResult").textContent="📍 “Encontra-me num ponto simples e fácil de identificar. Quando publicarmos, isto liga ao mapa.”"};
+$("weatherOverrideBtn").onclick=()=>{$("contextResult").textContent="🌦️ Escolhe manualmente: chuva / frio / calor / noite agradável — e a app adapta o plano."};
+$("quietBtn").onclick=()=>{$("contextResult").textContent="🤫 Zero conversa: cinema, concerto, museu, passeio tranquilo ou ver o pôr do sol."};
+$("ventBtn").onclick=()=>{$("contextResult").textContent="🫶 “Preciso de desabafar. Café tranquilo, sem pressa e sem soluções mágicas.”"};
+$("celebrateBtn").onclick=()=>{$("contextResult").textContent="🥂 “Há uma pequena vitória a celebrar. Não precisa de ser grande para merecer um brinde.”"};
+$("escapeBtn").onclick=()=>{$("contextResult").textContent="🏃 “Quero sair de casa nem que seja 30 minutos. Café, passeio ou gelado. Salva-me 😂”"};
+
+$("photoInviteBtn").onclick=()=>{$("specialResult").textContent="📸 Convite com fotografia: escolhe uma foto e usa-a como fundo do cartão quando a app estiver publicada."};
+$("musicInviteBtn").onclick=()=>{$("specialResult").textContent="🎵 Convite com música: junta uma música que combine com o plano ou com a pessoa."};
+$("secretCodeBtn").onclick=()=>{$("specialResult").textContent="🔐 Código secreto: “Só revelo o local quando responderes SIM 😏”"};
+$("progressiveBtn").onclick=()=>{$("specialResult").textContent="🧩 Pista 1: não precisas de fato. Pista 2: envolve comida. Pista 3: convém ter fome. Resposta: jantar 😎"};
+$("softBtn").onclick=()=>{$("specialResult").textContent="🌿 “Sem pressão nenhuma. Se te apetecer, tomamos um café esta semana.”"};
+$("boldBtn").onclick=()=>{$("specialResult").textContent="🔥 “Tenho um plano e quero-te lá. Quinta às 20h. Alinhas?”"};
+$("formalBtn").onclick=()=>{$("specialResult").textContent="🎩 “Gostaria muito de contar com a tua presença nesta ocasião especial.”"};
+
+$("neverAgainBtn").onclick=()=>{$("prefResult").textContent="🚫 Registado localmente: este tipo de plano fica fora das próximas sugestões 😂"};
+$("privateFeedbackBtn").onclick=()=>{$("prefResult").textContent="📝 Feedback privado: “Gostei / meh / nunca mais / repetia já”. Só para ti."};
+$("topBtn").onclick=()=>{$("prefResult").textContent="🏆 Top pessoal: Café ☕ • Passeio 🚶 • Jantar 🍽️. Quando houver mais histórico, ordenamos pelos teus usos reais."};
+
+
+const personaProfiles=["Homem","Mulher","Prefiro não dizer"];
+const personaStyles=["Clean","Dark","Colorido","Romântico","Sem frescuras 😂"];
+let personaProfile=localStorage.getItem("alinhasPersonaProfile") || "";
+let personaStyle=localStorage.getItem("alinhasPersonaStyle") || "Clean";
+
+function personaSlugProfile(v){
+  if(v==="Homem") return "homem";
+  if(v==="Mulher") return "mulher";
+  return "neutro";
+}
+function personaSlugStyle(v){
+  if(v==="Dark") return "dark";
+  if(v==="Colorido") return "colorido";
+  if(v==="Romântico") return "romantico";
+  if(v==="Sem frescuras 😂") return "sem-frescuras";
+  return "clean";
+}
+function clearPersonaClasses(){
+  [...document.body.classList].forEach(c=>{
+    if(c.startsWith("persona-") || c.startsWith("style-")) document.body.classList.remove(c);
+  });
+}
+function applyPersona(){
+  clearPersonaClasses();
+  document.body.classList.add("persona-"+personaSlugProfile(personaProfile||"Prefiro não dizer"));
+  document.body.classList.add("style-"+personaSlugStyle(personaStyle));
+  const box=$("currentPersona");
+  if(box) box.textContent=`Perfil: ${personaProfile||"Geral"} · Estilo: ${personaStyle}`;
+  reorderSuggestions();
+}
+function reorderSuggestions(){
+  // Não esconde nada: apenas escolhe uma categoria inicial coerente com o perfil.
+  if(!personaProfile) return;
+  if(personaProfile==="Homem"){
+    if(["Brunch","Chá","Baby shower"].includes(cat)) cat="Café";
+    tone = tone || "Natural";
+  }else if(personaProfile==="Mulher"){
+    tone = tone || "Natural";
+  }else{
+    tone = tone || "Natural";
+  }
+  try{
+    chips($("cats"),cats,cat,v=>cat=v);
+    chips($("tones"),tones,tone,v=>tone=v);
+  }catch(e){}
+}
+
+let tempProfile=personaProfile || "Prefiro não dizer";
+let tempStyle=personaStyle || "Clean";
+
+function renderPersonaPicker(){
+  chips($("profileChoices"),personaProfiles,tempProfile,v=>tempProfile=v);
+  chips($("styleChoices"),personaStyles,tempStyle,v=>tempStyle=v);
+}
+renderPersonaPicker();
+
+$("savePersonalization").onclick=()=>{
+  personaProfile=tempProfile;
+  personaStyle=tempStyle;
+  localStorage.setItem("alinhasPersonaProfile",personaProfile);
+  localStorage.setItem("alinhasPersonaStyle",personaStyle);
+  applyPersona();
+  $("personalizeOverlay").classList.add("hidden");
+};
+
+$("skipPersonalization").onclick=()=>{
+  personaProfile=personaProfile || "Prefiro não dizer";
+  personaStyle=personaStyle || "Clean";
+  applyPersona();
+  $("personalizeOverlay").classList.add("hidden");
+};
+
+$("changePersonaBtn").onclick=()=>{
+  tempProfile=personaProfile || "Prefiro não dizer";
+  tempStyle=personaStyle || "Clean";
+  renderPersonaPicker();
+  $("personalizeOverlay").classList.remove("hidden");
+};
+
+if(personaProfile){
+  applyPersona();
+  $("personalizeOverlay").classList.add("hidden");
+}else{
+  applyPersona();
+}
+
+})();
+</script>
+</body>
+</html>
